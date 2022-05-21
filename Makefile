@@ -8,6 +8,10 @@ all: install
 install: clean
 	bash scripts/install.sh
 
+.PHONY: deploy
+.SILENT: deploy
+deploy:
+	bash scripts/deploy_escrow.sh
 
 .PHONY: init-local
 .SILENT: init-local

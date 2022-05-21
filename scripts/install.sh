@@ -14,6 +14,8 @@ export LEDGER_ACC=$(dfx ledger account-id)
 rm ledger/ledger.did
 cp ledger/ledger.private.did ledger/ledger.did
 
+# dfx deploy ledger --argument '(record {minting_account = "'${MINT_ACC}'"; initial_values = vec { record { "'${LEDGER_ACC}'"; record { e8s=100_000_000_000 } }; }; send_whitelist = vec {}})'
+
 dfx deploy ledger --argument '(record  {
     minting_account = "'${MINT_ACC}'";
     initial_values = vec { record { "'${LEDGER_ACC}'"; record { e8s=100_000_000_000 } }; };
@@ -50,7 +52,7 @@ echo "=== DEPLOYED LEDGER CANISTER ==="
 
 ## === INSTALL FRONTEND / BACKEND ==== 
 
-# dfx deploy defi_dapp --argument "(opt principal \"$LEDGER_ID\")"
+dfx deploy escrow --argument "(opt principal \"$LEDGER_ID\")"
 
 # rsync -avr .dfx/$(echo ${DFX_NETWORK:-'**'})/canisters/** --exclude='assets/' --exclude='idl/' --exclude='*.wasm' --delete src/frontend/declarations
 
