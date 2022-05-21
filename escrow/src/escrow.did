@@ -1,3 +1,20 @@
-service : {
-    "greet": (text) -> (text) query;
-}
+type DepositReceipt = 
+ variant {
+   Err: DepositErr;
+   Ok: nat;
+ };
+type DepositErr = 
+ variant {
+   BalanceLow;
+   TransferFailure;
+ };
+type TokenCanister = principal;
+
+ type Escrow = 
+ service {
+   deposit: () -> (DepositReceipt);
+   getDepositAddress: () -> (blob);
+   string_address: () -> (text);
+ };
+
+ service : (ledger: opt principal) -> Escrow
