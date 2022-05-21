@@ -1,13 +1,17 @@
 {
   "version": 1,
-  "dfx": "0.8.4",
+  "dfx": "0.10.0",
   "canisters": {
     "escrow": {
       "type": "rust",
       "package": "escrow",
-      "root": "escrow/",
       "candid": "escrow/src/escrow.did",
       "wasm": "target/wasm32-unknown-unknown/release/escrow.wasm"
+    },
+    "ledger": {
+      "type": "custom",
+      "wasm": "ledger/ledger.wasm",
+      "candid": "ledger/ledger.did"
     }
   },
   "defaults": {
