@@ -24,7 +24,13 @@ rustup target add wasm32-unknown-unknown
 
 ```bash
 # clone the repo
+git clone --recurse-submodules --shallow-submodules git@github.com:SmellyFilly/3SCROW.git
 make install
+```
+
+```bash
+# only submodules
+git submodule update --init --recursive
 ```
 
 ### Ledger Usage

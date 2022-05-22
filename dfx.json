@@ -12,6 +12,10 @@
       "type": "custom",
       "wasm": "ledger/ledger.wasm",
       "candid": "ledger/ledger.did"
+    },
+    "internet_identity": {
+      "candid": "internet_identity/internet_identity.did",
+      "wasm": "internet_identity/internet_identity_dummy.wasm"
     }
   },
   "defaults": {

@@ -48,7 +48,10 @@ echo "=== DEPLOYED LEDGER CANISTER ==="
 
 ### === DEPLOY INTERNET IDENTITY =====
 
-# II_ENV=development dfx deploy internet_identity --no-wallet --argument '(null)'
+cd internet_identity
+npm install
+
+II_ENV=development dfx deploy internet_identity --no-wallet --argument '(null)'
 
 ## === INSTALL FRONTEND / BACKEND ==== 
 
