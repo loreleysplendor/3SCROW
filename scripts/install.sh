@@ -50,7 +50,9 @@ echo "=== DEPLOYED LEDGER CANISTER ==="
 
 cd internet_identity
 npm install
+cd ..
 
+# II_FETCH_ROOT_KEY=1 dfx deploy internet_identity --no-wallet --argument '(null)'
 II_ENV=development dfx deploy internet_identity --no-wallet --argument '(null)'
 
 ## === INSTALL FRONTEND / BACKEND ==== 

@@ -14,8 +14,9 @@
       "candid": "ledger/ledger.did"
     },
     "internet_identity": {
-      "candid": "internet_identity/internet_identity.did",
-      "wasm": "internet_identity/internet_identity_dummy.wasm"
+      "type": "custom",
+      "candid": "internet_identity/src/internet_identity/internet_identity.did",
+      "wasm": "internet_identity/internet_identity.wasm"
     }
   },
   "defaults": {

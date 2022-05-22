@@ -40,3 +40,15 @@ Give yourself icp tokens:
 ```bash
 make init-local II_PRINCIPAL=<YOUR II PRINCIPAL>
 ```
+
+### Internet Identity Usage
+
+Run Internet Identity front end:
+
+```bash
+cd interent_identity/
+npm start
+```
+
+Create an anchor by going to the front end...
+Then, for testing, get your principal by:
