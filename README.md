@@ -15,6 +15,7 @@ chains and tokens upon the IC network.
 - [motoko defi example](https://github.com/dfinity/examples/tree/master/motoko/defi)
 - [rust defi example](https://github.com/dfinity/examples/tree/master/rust/defi)
 - [internet computer docs](https://smartcontracts.org/docs/current/developer-docs/ic-overview)
+- [motoko cdn](https://github.com/gabrielnic/motoko-cdn)
 
 ### Requirements
 
