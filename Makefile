@@ -18,11 +18,11 @@ deploy:
 init-local: 
 	bash scripts/init_local_bal.sh $(II_PRINCIPAL)
 
-# .PHONY: build
-# .SILENT: build
-# build:
-# 	dfx canister create --all
-# 	dfx build
+.PHONY: build
+.SILENT: build
+build:
+	dfx canister create --all
+	dfx build
 
 # .PHONY: frontend
 # .SILENT: frontend

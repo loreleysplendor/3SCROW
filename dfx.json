@@ -8,6 +8,12 @@
       "candid": "escrow/src/escrow.did",
       "wasm": "target/wasm32-unknown-unknown/release/escrow.wasm"
     },
+    "controller": {
+      "type": "rust",
+      "package": "controller",
+      "candid": "controller/src/controller.did",
+      "wasm": "target/wasm32-unknown-unknown/release/controller.wasm"
+    },
     "ledger": {
       "type": "custom",
       "wasm": "ledger/ledger.wasm",

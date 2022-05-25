@@ -1,0 +1,6 @@
+type Controller = 
+ service {
+   whoami: () -> (text);
+ };
+
+ service : (ledger: opt principal) -> Controller
