@@ -1,0 +1,39 @@
+type DepositReceipt = 
+ variant {
+   Err: DepositErr;
+   Ok: nat;
+ };
+type DepositErr = 
+ variant {
+   BalanceLow;
+   TransferFailure;
+ };
+
+type WithdrawReceipt = 
+  variant {
+    Err: WithdrawErr;
+    Ok: nat;
+  };
+type WithdrawErr = 
+  variant {
+    BalanceLow;
+    TransferFailure;
+  };
+
+
+type TokenCanister = principal;
+type Amount = nat;
+type Address = principal;
+
+ type Escrow = 
+ service {
+   deposit: (TokenCanister) -> (DepositReceipt);
+   getDepositAddress: () -> (blob);
+   withdraw: (Amount, TokenCanister, principal) -> (WithdrawReceipt);
+
+   string_address: () -> (text);
+   whoami: () -> (text);
+   ledger: () -> (text);
+ };
+
+ service : (ledger: opt principal) -> Escrow

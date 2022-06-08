@@ -14,6 +14,24 @@
       "candid": "controller/src/controller.did",
       "wasm": "target/wasm32-unknown-unknown/release/controller.wasm"
     },
+    "webapp": {
+      "candid": "webapp/src/webapp/webapp.did",
+      "package": "webapp",
+      "type": "rust"
+    },
+    "webapp_assets": {
+      "dependencies": [
+        "webapp"
+      ],
+      "frontend": {
+        "entrypoint": "webapp/src/webapp_assets/src/index.html"
+      },
+      "source": [
+        "webapp/src/webapp_assets/assets",
+        "webapp/dist/webapp_assets/"
+      ],
+      "type": "assets"
+    },
     "ledger": {
       "type": "custom",
       "wasm": "ledger/ledger.wasm",
