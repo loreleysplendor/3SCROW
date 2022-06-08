@@ -52,12 +52,16 @@ cd internet_identity
 npm install
 cd ..
 
-# II_FETCH_ROOT_KEY=1 dfx deploy internet_identity --no-wallet --argument '(null)'
-II_ENV=development dfx deploy internet_identity --no-wallet --argument '(null)'
+II_FETCH_ROOT_KEY=1 II_DUMMY_CAPTCHA=1 dfx deploy internet_identity --no-wallet --argument '(null)'
+# II_ENV=development dfx deploy internet_identity --no-wallet --argument '(null)'
 
 ## === INSTALL FRONTEND / BACKEND ==== 
 
+# escrow canister
 dfx deploy escrow --argument "(opt principal \"$LEDGER_ID\")"
+
+# webapp front end + back end
+dfx deploy webapp_assets
 
 # rsync -avr .dfx/$(echo ${DFX_NETWORK:-'**'})/canisters/** --exclude='assets/' --exclude='idl/' --exclude='*.wasm' --delete src/frontend/declarations
 
