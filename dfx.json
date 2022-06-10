@@ -40,7 +40,8 @@
     "internet_identity": {
       "type": "custom",
       "candid": "internet_identity/src/internet_identity/internet_identity.did",
-      "wasm": "internet_identity/internet_identity.wasm"
+      "wasm": "internet_identity/internet_identity.wasm",
+      "build": "internet_identity/src/internet_identity/build.sh"
     }
   },
   "defaults": {

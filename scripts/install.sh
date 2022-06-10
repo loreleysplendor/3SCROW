@@ -50,10 +50,12 @@ echo "=== DEPLOYED LEDGER CANISTER ==="
 
 cd internet_identity
 npm install
+npm run build
 cd ..
 
 II_FETCH_ROOT_KEY=1 II_DUMMY_CAPTCHA=1 dfx deploy internet_identity --no-wallet --argument '(null)'
 # II_ENV=development dfx deploy internet_identity --no-wallet --argument '(null)'
+echo "=== DEPLOYED II CANISTER ==="
 
 ## === INSTALL FRONTEND / BACKEND ==== 
 
@@ -61,7 +63,9 @@ II_FETCH_ROOT_KEY=1 II_DUMMY_CAPTCHA=1 dfx deploy internet_identity --no-wallet 
 dfx deploy escrow --argument "(opt principal \"$LEDGER_ID\")"
 
 # webapp front end + back end
+npm install
 dfx deploy webapp_assets
+echo "=== DEPLOYED WEBAPP CANISTERS ==="
 
 # rsync -avr .dfx/$(echo ${DFX_NETWORK:-'**'})/canisters/** --exclude='assets/' --exclude='idl/' --exclude='*.wasm' --delete src/frontend/declarations
 
