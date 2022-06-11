@@ -49,11 +49,12 @@ echo "=== DEPLOYED LEDGER CANISTER ==="
 ### === DEPLOY INTERNET IDENTITY =====
 
 cd internet_identity
-npm install
-npm run build
+npm ci
+# npm run build
 cd ..
 
-II_FETCH_ROOT_KEY=1 II_DUMMY_CAPTCHA=1 dfx deploy internet_identity --no-wallet --argument '(null)'
+echo "=== Running II Deployment ==="
+II_FETCH_ROOT_KEY=1 dfx deploy internet_identity --no-wallet --argument '(null)'
 # II_ENV=development dfx deploy internet_identity --no-wallet --argument '(null)'
 echo "=== DEPLOYED II CANISTER ==="
 

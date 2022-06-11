@@ -1,63 +1,59 @@
 import React, { useEffect, useState, useCallback } from "react";
 
-import { getBackendActor } from "../helpers/auth";
+import { getBackendActor } from "../helpers/II_auth";
 import { AuthClient } from "@dfinity/auth-client";
+
+import { Actor, Identity } from "@dfinity/agent";
 
 function App() {
   const [logged, setLogged] = useState(false);
-  const [remember, setRemember] = useState(true);
-  const [identity, setIdentity] = useState("");
+  const [user, setUser] = useState("");
+  const canisterId = process.env.WEBAPP_CANISTER_ID;
 
-  const handleRemember = () => {
-    setRemember(!remember);
+  const days = BigInt(1);
+  const hours = BigInt(24);
+  const nanoseconds = BigInt(3600000000000);
+
+  const setIdentity = async (authClient: AuthClient) => {
+    const identity = await authClient.getIdentity();
+    const princ = await identity.getPrincipal();
+    setUser(princ.toString());
   };
 
-  const isAuth = async () => {
+  const isAuthenticated = async () => {
     const authClient = await AuthClient.create();
-    const isAuth = await authClient.isAuthenticated();
-    if (isAuth) {
-      setLogged(true);
-    }
-  };
-
-  const whoami = async () => {
-    const authClient = await AuthClient.create();
-    const ba = await getBackendActor(authClient);
-    const value = await ba.get_principal();
-    setIdentity(value.toText());
+    const isLogged = await authClient.isAuthenticated();
+    setLogged(isLogged);
+    setIdentity(authClient);
   };
 
   useEffect(() => {
-    isAuth();
-    if (logged) {
-      whoami();
-    }
+    isAuthenticated();
+    // if (logged) {
+    //   console.log(user);
+    // }
   });
 
   const handleLogin = async (e: React.FormEvent<HTMLButtonElement>) => {
     e.preventDefault();
-    const daysToAdd = 1;
-    const expiry = Date.now() + daysToAdd * 86400000;
     const authClient = await AuthClient.create();
     if (!logged) {
       await authClient.login({
         onSuccess: async () => {
-          const ba = await getBackendActor(authClient);
-          const principal = await ba.get_principal();
-          const ident = principal.toText();
-          setIdentity(ident);
+          setIdentity(authClient);
           setLogged(true);
         },
         identityProvider:
-          "http://localhost:8000?canisterId=" +
-          process.env.INTERNET_IDENTITY_CANISTER_ID,
+          process.env.DFX_NETWORK === "ic"
+            ? "https://identity.ic0.app/#authorize"
+            : `http://${process.env.INTERNET_IDENTITY_CANISTER_ID}.localhost:8000`, // for some reason, it hated using just the canister. It needs to be a subdomain...
+        maxTimeToLive: days * hours * nanoseconds,
       });
     } else {
       await authClient.logout();
       setLogged(false);
     }
   };
-  <button onClick={handleLogin}>Sign In</button>;
   return (
     <div>
       {!logged && (
@@ -77,6 +73,7 @@ function App() {
       {logged && (
         <div>
           <button onClick={handleLogin}>logout</button>
+          <p>{user}</p>
         </div>
       )}
     </div>
